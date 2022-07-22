@@ -1,0 +1,104 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"StatusElement": {
+				"properties": {
+					"status_id": {
+						"type": "string"
+					},
+					"status_name": {
+						"type": "string"
+					},
+					"color": {
+						"type": "string"
+					},
+					"module": {
+						"type": "string"
+					},
+					"is_default": {
+						"type": "number",
+						"format": "double"
+					},
+					"modified_date": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"status_id",
+					"status_name",
+					"color",
+					"module",
+					"is_default",
+					"modified_date"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"StatusResponse": {
+				"properties": {
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/StatusElement"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "scoro_status",
+		"version": "1.0.0",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/api/status": {
+			"get": {
+				"operationId": "GetStatusData",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/StatusResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "filter",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}
